@@ -20,7 +20,7 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - isa-l
+    - isa-l 2.30.0
     - python
     - pip
     - setuptools
@@ -32,8 +32,11 @@ test:
   imports:
     - isal
   commands:
+    - pip check
     - python -c "from isal import igzip"
     - python -c "from isal import isal_zlib; isal_zlib.adler32(b'test')"
+  requires:
+    - pip
 
 about:
   home: https://github.com/pycompression/python-isal
