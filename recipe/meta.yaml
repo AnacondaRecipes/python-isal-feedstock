@@ -10,8 +10,9 @@ source:
   sha256: 1364f4e3255a57d51c01422ab3ae785a43c076d516ebf49f6a25adecf8232105
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  skip: true  # [not (x86_64)]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv
   script_env:
     - PYTHON_ISAL_LINK_DYNAMIC=true  # Forces a dynamic link against isa-l in conda-forge
 
@@ -22,6 +23,8 @@ requirements:
     - isa-l
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
     - isa-l >=2.26
@@ -34,9 +37,15 @@ test:
 
 about:
   home: https://github.com/pycompression/python-isal
+  license_family: PSF
   license: PSF-2.0
   license_file: LICENSE
   summary: Faster zlib and gzip compatible compression and decompression by providing python bindings for the isa-l library.
+  description: |
+    This package provides Python bindings for the ISA-L library. 
+    The Intel(R) Intelligent Storage Acceleration Library (ISA-L) implements several key algorithms in assembly language. 
+    This includes a variety of functions to provide zlib/gzip-compatible compression.
+
   doc_url: https://python-isal.readthedocs.io
   dev_url: https://github.com/pycompression/python-isal
 
